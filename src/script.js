@@ -421,6 +421,31 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
+  // Terminal Quickstart Clone Command Copy
+  const copyCloneBtn = document.getElementById('copy-clone-btn');
+  if (copyCloneBtn) {
+    copyCloneBtn.addEventListener('click', async () => {
+      const cloneCommands = 'git clone https://github.com/oreliolabs/orelio.git\ncd orelio && bun install\nbun run dev';
+      try {
+        await navigator.clipboard.writeText(cloneCommands);
+        copyCloneBtn.classList.add('copied');
+        copyCloneBtn.innerHTML = `
+          <span class="material-symbols-outlined copy-icon">check</span>
+          <span class="copy-text">Copied!</span>
+        `;
+        setTimeout(() => {
+          copyCloneBtn.classList.remove('copied');
+          copyCloneBtn.innerHTML = `
+            <span class="material-symbols-outlined copy-icon">content_copy</span>
+            <span class="copy-text">Copy</span>
+          `;
+        }, 2200);
+      } catch (err) {
+        console.error('Failed to copy to clipboard', err);
+      }
+    });
+  }
+
   // Initialize accessibility attributes
   updateThemeUI(getTheme());
 });
