@@ -55,7 +55,7 @@
   --color-teal-active: #0D9488;
   --color-mint: rgba(20, 184, 166, 0.16);
   --color-mint-border: rgba(20, 184, 166, 0.32);
-  --color-forest: #032B25;
+  --color-forest: #2DD4BF;
   --color-gray-body: #94A3B8;
   --color-gray-muted: #64748B;
   --color-gray-subtle: #8492A6;
@@ -183,6 +183,16 @@ p {
   font-family: var(--font-body);
 }
 
+.btn .material-symbols-outlined {
+  font-size: 19px;
+  width: 19px;
+  height: 19px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+}
+
 .btn:active {
   transform: scale(0.98);
 }
@@ -218,16 +228,33 @@ p {
   border-radius: var(--radius-sm);
 }
 
+.btn-sm .material-symbols-outlined {
+  font-size: 16px;
+  width: 16px;
+  height: 16px;
+}
+
 .btn-lg {
-  padding: 14px 28px;
+  padding: 14px 22px 14px 26px;
   font-size: 15px;
   border-radius: var(--radius-lg);
+}
+
+.btn-lg:has(> .material-symbols-outlined:last-child) {
+  padding-left: 26px;
+  padding-right: 20px;
+}
+
+.btn-lg:has(> :first-child:is(svg, .material-symbols-outlined)) {
+  padding-left: 20px;
+  padding-right: 26px;
 }
 
 /* Eyebrow Badge */
 .eyebrow-badge {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 8px;
   padding: 6px 14px;
   border-radius: var(--radius-full);
@@ -236,7 +263,7 @@ p {
   color: var(--color-forest);
   font-size: 12px;
   font-weight: 700;
-  margin-bottom: 48px;
+  margin: 0 auto 48px;
 }
 
 .eyebrow-badge .material-symbols-outlined {
@@ -265,6 +292,7 @@ p {
 }
 
 .nav-inner {
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -322,10 +350,15 @@ p {
 }
 
 .nav-links {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
   display: flex;
   align-items: center;
   gap: 28px;
   list-style: none;
+  z-index: 2;
 }
 
 .nav-links a {
@@ -502,6 +535,7 @@ p {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  min-height: 42px;
   padding-bottom: 20px;
   border-bottom: 1px solid var(--color-border-light);
   margin-bottom: 24px;
@@ -511,12 +545,19 @@ p {
   display: flex;
   align-items: center;
   gap: 12px;
+  transition: opacity 0.25s ease, visibility 0.25s ease;
+}
+
+.mockup-user.is-hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
 }
 
 .mockup-avatar {
   width: 42px;
   height: 42px;
-  border-radius: 50%;
+  border-radius: 12px;
   background: #EEF4FF;
   color: #2563EB;
   font-family: var(--font-heading);
@@ -529,6 +570,21 @@ p {
   flex-shrink: 0;
   user-select: none;
   transition: all 0.25s ease;
+}
+
+.mockup-avatar.avatar-family {
+  background: #E6F4F1;
+  color: #006A65;
+}
+
+.mockup-avatar.avatar-self {
+  background: #EEF4FF;
+  color: #2563EB;
+}
+
+.mockup-avatar.avatar-spouse {
+  background: #FDF2F8;
+  color: #DB2777;
 }
 
 .mockup-user-name {
@@ -554,13 +610,15 @@ p {
   position: relative;
   display: inline-block;
   z-index: 50;
+  margin-left: auto;
 }
 
 .profile-dropdown-btn {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  padding: 6px 12px 6px 10px;
+  gap: 9px;
+  min-height: 42px;
+  padding: 8px 14px 8px 12px;
   border-radius: 12px;
   background: #FFFFFF;
   border: 1px solid var(--color-border);
@@ -674,18 +732,25 @@ p {
 }
 
 .networth-box {
-  background: linear-gradient(135deg, rgba(230, 244, 241, 0.4) 0%, rgba(255, 255, 255, 0.8) 100%);
-  padding: 22px;
-  border-radius: var(--radius-lg);
-  border: 1px solid var(--color-mint-border);
+  position: relative;
+  overflow: hidden;
+  background: transparent;
+  padding: 4px 0 0 0;
+  border: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  min-height: 165px;
 }
 
 .box-label {
+  position: relative;
+  z-index: 2;
   font-size: 11px;
   font-weight: 800;
   text-transform: uppercase;
   letter-spacing: 0.08em;
-  color: var(--color-gray-subtle);
+  color: var(--color-teal);
   margin-bottom: 8px;
 }
 
@@ -695,13 +760,15 @@ p {
   font-weight: 900;
   color: var(--color-navy);
   letter-spacing: -0.03em;
-  margin-bottom: 6px;
+  margin-bottom: 8px;
   display: inline-flex;
   align-items: baseline;
   line-height: 1.15;
   font-variant-numeric: tabular-nums;
   cursor: pointer;
   user-select: none;
+  position: relative;
+  z-index: 2;
 }
 
 .slot-char {
@@ -728,7 +795,6 @@ p {
 .slot-digit {
   height: 1.15em;
   line-height: 1.15;
-  display: block;
   text-align: center;
 }
 
@@ -741,6 +807,7 @@ p {
 .growth-badge {
   display: inline-flex;
   align-items: center;
+  align-self: flex-start;
   gap: 4px;
   font-size: 12px;
   font-weight: 700;
@@ -748,6 +815,54 @@ p {
   background: var(--color-mint);
   padding: 3px 10px;
   border-radius: var(--radius-full);
+  position: relative;
+  z-index: 2;
+}
+
+/* Full-Width Sparkline Graph */
+.networth-graph-wrapper {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 8px;
+  width: 100%;
+  height: 96px;
+  pointer-events: none;
+  z-index: 1;
+  clip-path: inset(0 0% 0 0);
+  transition: clip-path 1.1s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.networth-graph-svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+  overflow: visible;
+}
+
+.graph-line-path {
+  stroke: var(--color-teal);
+  stroke-width: 3.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  vector-effect: non-scaling-stroke;
+  transition: d 0.6s cubic-bezier(0.16, 1, 0.3, 1), stroke 0.3s ease;
+  filter: drop-shadow(0 2px 8px rgba(0, 106, 101, 0.18));
+}
+
+.graph-area-path {
+  transition: d 0.6s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s ease;
+}
+
+/* Interactive Card Hover Glow */
+.mockup-card:hover .graph-line-path {
+  filter: drop-shadow(0 3px 12px rgba(0, 106, 101, 0.32));
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .networth-graph-wrapper {
+    transition: none !important;
+  }
 }
 
 .breakdown-box {
@@ -1298,6 +1413,12 @@ p {
 /* ==========================================================================
    Responsive Adaptations
    ========================================================================== */
+@media (max-width: 1100px) and (min-width: 961px) {
+  .nav-links {
+    gap: 18px;
+  }
+}
+
 @media (max-width: 960px) {
   .nav-links, .vault-status-pill {
     display: none;
@@ -1583,6 +1704,16 @@ html[data-theme="dark"] .github-badge-btn .star-pill {
   color: #F1F5F9;
 }
 
+html[data-theme="dark"] .eyebrow-badge {
+  background: rgba(20, 184, 166, 0.12);
+  border-color: rgba(20, 184, 166, 0.28);
+  color: #2DD4BF;
+}
+
+html[data-theme="dark"] .eyebrow-badge .material-symbols-outlined {
+  color: #2DD4BF;
+}
+
 html[data-theme="dark"] .vault-status-pill {
   background: #0E1724;
   border-color: rgba(255, 255, 255, 0.1);
@@ -1598,6 +1729,21 @@ html[data-theme="dark"] .mockup-card {
 html[data-theme="dark"] .mockup-avatar {
   background: rgba(37, 99, 235, 0.2);
   color: #60A5FA;
+}
+
+html[data-theme="dark"] .mockup-avatar.avatar-family {
+  background: rgba(20, 184, 166, 0.2);
+  color: #2DD4BF;
+}
+
+html[data-theme="dark"] .mockup-avatar.avatar-self {
+  background: rgba(37, 99, 235, 0.2);
+  color: #60A5FA;
+}
+
+html[data-theme="dark"] .mockup-avatar.avatar-spouse {
+  background: rgba(219, 39, 119, 0.2);
+  color: #F472B6;
 }
 
 html[data-theme="dark"] .profile-dropdown-btn {
@@ -1642,8 +1788,27 @@ html[data-theme="dark"] .profile-dropdown-item.active {
 }
 
 html[data-theme="dark"] .networth-box {
-  background: linear-gradient(135deg, rgba(20, 184, 166, 0.12) 0%, rgba(11, 19, 30, 0.95) 100%);
-  border-color: rgba(20, 184, 166, 0.28);
+  background: transparent;
+  border: none;
+}
+
+html[data-theme="dark"] .graph-line-path {
+  stroke: #14B8A6;
+  filter: drop-shadow(0 2px 10px rgba(20, 184, 166, 0.35));
+}
+
+html[data-theme="dark"] .mockup-card:hover .graph-line-path {
+  filter: drop-shadow(0 3px 16px rgba(20, 184, 166, 0.5));
+}
+
+html[data-theme="dark"] #networthGraphGradient stop:first-child {
+  stop-color: #14B8A6;
+  stop-opacity: 0.22;
+}
+
+html[data-theme="dark"] #networthGraphGradient stop:last-child {
+  stop-color: #14B8A6;
+  stop-opacity: 0.01;
 }
 
 html[data-theme="dark"] .breakdown-row {

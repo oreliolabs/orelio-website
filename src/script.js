@@ -37,39 +37,79 @@ document.addEventListener('DOMContentLoaded', () => {
   const statusLabel = document.getElementById('status-label');
   const mockupAvatar = document.getElementById('mockup-avatar');
   const mockupUserName = document.getElementById('mockup-user-name');
+  const mockupUser = document.querySelector('.mockup-user');
 
   // Profile data for dynamic ticker switching
   const profiles = {
     all: {
-      label: 'Family (2)',
-      name: 'Vikram Menon',
-      avatar: 'V',
-      status: 'Master Vault Unlocked',
+      label: 'My Family (2)',
+      name: 'Family Portfolio',
+      avatar: 'F',
+      avatarClass: 'avatar-family',
+      status: 'Family Portfolio',
+      showUser: true,
       networth: '₹ 6.13 Cr',
       growth: '+₹ 18.2 L (+14.2%) this year',
-      breakdowns: ['₹ 10.21 L', '₹ 10.08 L', '₹ 5.87 Cr', '₹ 8,000']
+      breakdowns: ['₹ 10.21 L', '₹ 10.08 L', '₹ 5.87 Cr', '₹ 8,000'],
+      graphLine: 'M -2,86 C 110,86 200,48 302,14',
+      graphArea: 'M -2,86 C 110,86 200,48 302,14 L 302,100 L -2,100 Z'
     },
     self: {
       label: 'Self (Vikram)',
       name: 'Vikram Menon',
       avatar: 'V',
+      avatarClass: 'avatar-self',
       status: 'Self Portfolio',
+      showUser: true,
       networth: '₹ 4.82 Cr',
       growth: '+₹ 14.5 L (+13.8%) this year',
-      breakdowns: ['₹ 8.15 L', '₹ 7.60 L', '₹ 4.66 Cr', '₹ 8,000']
+      breakdowns: ['₹ 8.15 L', '₹ 7.60 L', '₹ 4.66 Cr', '₹ 8,000'],
+      graphLine: 'M -2,86 C 105,86 210,52 302,18',
+      graphArea: 'M -2,86 C 105,86 210,52 302,18 L 302,100 L -2,100 Z'
     },
     spouse: {
       label: 'Spouse (Meera)',
       name: 'Meera Menon',
       avatar: 'M',
+      avatarClass: 'avatar-spouse',
       status: 'Spouse Portfolio',
+      showUser: true,
       networth: '₹ 1.31 Cr',
       growth: '+₹ 3.7 L (+15.9%) this year',
-      breakdowns: ['₹ 2.06 L', '₹ 2.48 L', '₹ 1.21 Cr', '₹ 0']
+      breakdowns: ['₹ 2.06 L', '₹ 2.48 L', '₹ 1.21 Cr', '₹ 0'],
+      graphLine: 'M -2,86 C 120,86 195,40 302,10',
+      graphArea: 'M -2,86 C 120,86 195,40 302,10 L 302,100 L -2,100 Z'
     }
   };
 
   let currentProfileKey = 'all';
+
+  // Dynamic Sparkline Sweep Reveal Animation
+  function animateSparkline(data) {
+    const graphWrapper = document.querySelector('.networth-graph-wrapper');
+    const graphLinePath = document.getElementById('graph-line-path');
+    const graphAreaPath = document.getElementById('graph-area-path');
+
+    if (graphLinePath && data.graphLine) {
+      graphLinePath.setAttribute('d', data.graphLine);
+    }
+    if (graphAreaPath && data.graphArea) {
+      graphAreaPath.setAttribute('d', data.graphArea);
+    }
+
+    if (!graphWrapper) return;
+
+    // Reset clip-path for smooth sweep reveal from left to right
+    graphWrapper.style.transition = 'none';
+    graphWrapper.style.clipPath = 'inset(0 100% 0 0)';
+
+    // Force reflow
+    void graphWrapper.offsetWidth;
+
+    // Smoothly reveal full graph from left to right across container
+    graphWrapper.style.transition = 'clip-path 1.1s cubic-bezier(0.16, 1, 0.3, 1)';
+    graphWrapper.style.clipPath = 'inset(0 0% 0 0)';
+  }
 
   // Slot machine roll animation for numbers
   function runSlotMachine(container, targetText = '₹ 6.13 Cr', options = {}) {
@@ -163,18 +203,33 @@ document.addEventListener('DOMContentLoaded', () => {
       `;
     }
 
-    if (statusLabel) {
+    if (mockupUser) {
+      if (data.showUser) {
+        mockupUser.classList.remove('is-hidden');
+      } else {
+        mockupUser.classList.add('is-hidden');
+      }
+    }
+
+    if (statusLabel && data.status) {
       statusLabel.textContent = data.status;
     }
 
     if (mockupAvatar && data.avatar) {
       mockupAvatar.textContent = data.avatar;
-      mockupAvatar.setAttribute('aria-label', data.name);
+      mockupAvatar.setAttribute('aria-label', data.name || '');
+      mockupAvatar.classList.remove('avatar-family', 'avatar-self', 'avatar-spouse');
+      if (data.avatarClass) {
+        mockupAvatar.classList.add(data.avatarClass);
+      }
     }
 
     if (mockupUserName && data.name) {
       mockupUserName.textContent = data.name;
     }
+
+    // Animate sparkline synchronized with ticker
+    animateSparkline(data);
 
     breakdownValues.forEach((el, index) => {
       if (data.breakdowns[index]) {

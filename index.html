@@ -65,11 +65,6 @@
           <span class="material-symbols-outlined theme-icon-light">light_mode</span>
         </button>
 
-        <a href="/" class="btn btn-primary btn-sm">
-          <span>Launch App</span>
-          <span class="material-symbols-outlined" style="font-size: 16px;">arrow_forward</span>
-        </a>
-
         <button id="mobile-toggle" class="mobile-toggle" aria-label="Toggle navigation menu">
           <span class="material-symbols-outlined">menu</span>
         </button>
@@ -90,7 +85,6 @@
         </div>
         <span class="mobile-theme-text">Toggle Theme</span>
       </button>
-      <a href="/" class="btn btn-primary" style="margin-top: 10px;">Launch App</a>
     </div>
   </header>
 
@@ -115,8 +109,8 @@
 
           <div class="hero-actions">
             <a href="/" class="btn btn-primary btn-lg">
-              <span>Open Wealth Ledger</span>
-              <span class="material-symbols-outlined">arrow_forward</span>
+              <span>Download</span>
+              <span class="material-symbols-outlined">arrow_downward</span>
             </a>
             <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-lg">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
@@ -129,15 +123,15 @@
           <div class="trust-strip">
             <div class="trust-item">
               <span class="material-symbols-outlined">block</span>
-              <span>Zero Behavioral Telemetry</span>
+              <span>No Data Tracking</span>
             </div>
             <div class="trust-item">
               <span class="material-symbols-outlined">code</span>
               <span>Free &amp; Open Source</span>
             </div>
             <div class="trust-item">
-              <span class="material-symbols-outlined">key</span>
-              <span>Client-Side Encryption</span>
+              <span class="material-symbols-outlined">lock</span>
+              <span>Password Protected</span>
             </div>
           </div>
         </div>
@@ -147,12 +141,12 @@
           <div class="mockup-card">
             <div class="mockup-topbar">
               <div class="mockup-user">
-                <div id="mockup-avatar" class="mockup-avatar" aria-label="Vikram Menon">V</div>
+                <div id="mockup-avatar" class="mockup-avatar avatar-family" aria-label="Family Portfolio">F</div>
                 <div>
-                  <div id="mockup-user-name" class="mockup-user-name">Vikram Menon</div>
+                  <div id="mockup-user-name" class="mockup-user-name">Family Portfolio</div>
                   <span id="mockup-user-status" class="mockup-user-status">
                     <span class="material-symbols-outlined" style="font-size: 11px;">lock</span>
-                    <span id="status-label">Master Vault Unlocked</span>
+                    <span id="status-label">Family Portfolio</span>
                   </span>
                 </div>
               </div>
@@ -161,14 +155,14 @@
               <div id="profile-dropdown-wrapper" class="profile-dropdown-wrapper">
                 <button id="profile-dropdown-btn" class="profile-dropdown-btn" aria-haspopup="listbox" aria-expanded="false" aria-label="Select profile">
                   <span class="material-symbols-outlined profile-btn-icon">group</span>
-                  <span id="profile-btn-label" class="profile-btn-label">Family (2)</span>
+                  <span id="profile-btn-label" class="profile-btn-label">My Family (2)</span>
                   <span class="material-symbols-outlined profile-btn-chevron">expand_more</span>
                 </button>
                 <div id="profile-dropdown-menu" class="profile-dropdown-menu" role="listbox">
                   <div class="profile-dropdown-header">SELECT PROFILE</div>
                   <div class="profile-dropdown-divider"></div>
                   <button class="profile-dropdown-item active" role="option" aria-selected="true" data-profile="all">
-                    <span>Family (2)</span>
+                    <span>My Family (2)</span>
                   </button>
                   <button class="profile-dropdown-item" role="option" aria-selected="false" data-profile="self">
                     <span>Self (Vikram)</span>
@@ -182,11 +176,29 @@
 
             <div class="mockup-grid">
               <div class="networth-box">
-                <div class="box-label">Aggregated Family Net Worth</div>
+                <div class="box-label">Current Net Worth</div>
                 <div id="networth-amount" class="networth-amount">₹ 6.13 Cr</div>
                 <div id="growth-badge" class="growth-badge">
                   <span class="material-symbols-outlined" style="font-size: 14px;">trending_up</span>
                   <span>+₹ 18.2 L (+14.2%) this year</span>
+                </div>
+
+                <!-- Corner Sparkline Graph -->
+                <div class="networth-graph-wrapper" aria-hidden="true">
+                  <svg class="networth-graph-svg" viewBox="0 0 300 100" preserveAspectRatio="none">
+                    <defs>
+                      <linearGradient id="networthGraphGradient" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="0%" stop-color="#006A65" stop-opacity="0.16" />
+                        <stop offset="100%" stop-color="#006A65" stop-opacity="0.01" />
+                      </linearGradient>
+                    </defs>
+                    <path id="graph-area-path" class="graph-area-path"
+                      d="M -2,86 C 110,86 200,48 302,14 L 302,100 L -2,100 Z"
+                      fill="url(#networthGraphGradient)" />
+                    <path id="graph-line-path" class="graph-line-path"
+                      d="M -2,86 C 110,86 200,48 302,14"
+                      fill="none" />
+                  </svg>
                 </div>
               </div>
 
