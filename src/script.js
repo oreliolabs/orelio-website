@@ -446,6 +446,28 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  // Scroll to Top Floating Button
+  const scrollTopBtn = document.getElementById('scroll-top-btn');
+  if (scrollTopBtn) {
+    const toggleScrollTop = () => {
+      if (window.scrollY > 450) {
+        scrollTopBtn.classList.add('visible');
+      } else {
+        scrollTopBtn.classList.remove('visible');
+      }
+    };
+
+    window.addEventListener('scroll', toggleScrollTop, { passive: true });
+    toggleScrollTop();
+
+    scrollTopBtn.addEventListener('click', () => {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    });
+  }
+
   // Initialize accessibility attributes
   updateThemeUI(getTheme());
 });
