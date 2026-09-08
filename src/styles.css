@@ -517,9 +517,18 @@ p {
   width: 42px;
   height: 42px;
   border-radius: 50%;
-  object-fit: cover;
-  border: 2px solid #FFFFFF;
-  box-shadow: var(--shadow-xs);
+  background: #EEF4FF;
+  color: #2563EB;
+  font-family: var(--font-heading);
+  font-size: 16px;
+  font-weight: 800;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  user-select: none;
+  transition: all 0.25s ease;
 }
 
 .mockup-user-name {
@@ -541,23 +550,121 @@ p {
   border-radius: var(--radius-full);
 }
 
-.privacy-toggle-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: 6px 12px;
-  border-radius: var(--radius-sm);
-  background: #F8F9FA;
-  border: 1px solid var(--color-border);
-  font-size: 12px;
-  font-weight: 700;
-  color: var(--color-navy);
-  cursor: pointer;
-  transition: all 0.2s ease;
+.profile-dropdown-wrapper {
+  position: relative;
+  display: inline-block;
+  z-index: 50;
 }
 
-.privacy-toggle-btn:hover {
-  background: #EDF1F3;
+.profile-dropdown-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 12px 6px 10px;
+  border-radius: 12px;
+  background: #FFFFFF;
+  border: 1px solid var(--color-border);
+  cursor: pointer;
+  box-shadow: var(--shadow-xs);
+  transition: all 0.2s ease;
+  font-family: var(--font-body);
+}
+
+.profile-dropdown-btn:hover {
+  background: #F8F9FA;
+  border-color: rgba(195, 198, 206, 0.6);
+}
+
+.profile-btn-icon {
+  font-size: 19px;
+  color: var(--color-teal);
+}
+
+.profile-btn-label {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--color-navy);
+}
+
+.profile-btn-chevron {
+  font-size: 18px;
+  color: var(--color-gray-muted);
+  transition: transform 0.2s ease;
+}
+
+.profile-dropdown-wrapper.open .profile-btn-chevron {
+  transform: rotate(180deg);
+}
+
+.profile-dropdown-menu {
+  display: none;
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  min-width: 200px;
+  background: #FFFFFF;
+  border: 1px solid var(--color-border);
+  border-radius: 16px;
+  box-shadow: 0 14px 36px rgba(0, 22, 42, 0.12);
+  padding: 8px 0;
+  z-index: 100;
+}
+
+.profile-dropdown-wrapper.open .profile-dropdown-menu {
+  display: block;
+  animation: dropdownFadeIn 0.16s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes dropdownFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.profile-dropdown-header {
+  font-size: 10px;
+  font-weight: 800;
+  color: var(--color-gray-subtle);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 6px 16px 8px;
+}
+
+.profile-dropdown-divider {
+  height: 1px;
+  background: var(--color-border-light);
+  margin-bottom: 4px;
+}
+
+.profile-dropdown-item {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  padding: 9px 16px;
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--color-navy);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+.profile-dropdown-item:hover {
+  background: #F8F9FA;
+}
+
+.profile-dropdown-item.active {
+  background: var(--color-mint);
+  color: var(--color-teal);
+  font-weight: 700;
 }
 
 .mockup-grid {
@@ -1489,17 +1596,49 @@ html[data-theme="dark"] .mockup-card {
 }
 
 html[data-theme="dark"] .mockup-avatar {
-  border-color: #141F30;
+  background: rgba(37, 99, 235, 0.2);
+  color: #60A5FA;
 }
 
-html[data-theme="dark"] .privacy-toggle-btn {
-  background: #131E2D;
+html[data-theme="dark"] .profile-dropdown-btn {
+  background: #0E1724;
   border-color: rgba(255, 255, 255, 0.12);
+}
+
+html[data-theme="dark"] .profile-btn-label {
   color: #F1F5F9;
 }
 
-html[data-theme="dark"] .privacy-toggle-btn:hover {
-  background: #1B2B3F;
+html[data-theme="dark"] .profile-btn-chevron {
+  color: #94A3B8;
+}
+
+html[data-theme="dark"] .profile-dropdown-btn:hover {
+  background: #142032;
+  border-color: rgba(20, 184, 166, 0.4);
+}
+
+html[data-theme="dark"] .profile-dropdown-menu {
+  background: #0C141F;
+  border-color: rgba(255, 255, 255, 0.12);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.7);
+}
+
+html[data-theme="dark"] .profile-dropdown-header {
+  color: #8492A6;
+}
+
+html[data-theme="dark"] .profile-dropdown-item {
+  color: #F1F5F9;
+}
+
+html[data-theme="dark"] .profile-dropdown-item:hover {
+  background: #142032;
+}
+
+html[data-theme="dark"] .profile-dropdown-item.active {
+  background: rgba(20, 184, 166, 0.16);
+  color: #2DD4BF;
 }
 
 html[data-theme="dark"] .networth-box {

@@ -110,7 +110,7 @@
           </h1>
 
           <p class="hero-subtitle">
-            An open-source wealth ledger for your entire net worth — private and always under your control.
+            An open-source wealth ledger for your family’s entire net worth — private and always under your control.
           </p>
 
           <div class="hero-actions">
@@ -147,19 +147,37 @@
           <div class="mockup-card">
             <div class="mockup-topbar">
               <div class="mockup-user">
-                <img src="/assets/alexander_bloom_avatar.png" alt="Alexander Bloom" class="mockup-avatar">
+                <div id="mockup-avatar" class="mockup-avatar" aria-label="Vikram Menon">V</div>
                 <div>
-                  <div class="mockup-user-name">Alexander Bloom</div>
-                  <span class="mockup-user-status">
+                  <div id="mockup-user-name" class="mockup-user-name">Vikram Menon</div>
+                  <span id="mockup-user-status" class="mockup-user-status">
                     <span class="material-symbols-outlined" style="font-size: 11px;">lock</span>
-                    Master Vault Unlocked
+                    <span id="status-label">Master Vault Unlocked</span>
                   </span>
                 </div>
               </div>
-              <button id="privacy-toggle-btn" class="privacy-toggle-btn" aria-label="Toggle sensitive numbers visibility">
-                <span class="material-symbols-outlined" style="font-size: 16px;">visibility_off</span>
-                <span>Hide Numbers</span>
-              </button>
+
+              <!-- Profile Selector Dropdown -->
+              <div id="profile-dropdown-wrapper" class="profile-dropdown-wrapper">
+                <button id="profile-dropdown-btn" class="profile-dropdown-btn" aria-haspopup="listbox" aria-expanded="false" aria-label="Select profile">
+                  <span class="material-symbols-outlined profile-btn-icon">group</span>
+                  <span id="profile-btn-label" class="profile-btn-label">Family (2)</span>
+                  <span class="material-symbols-outlined profile-btn-chevron">expand_more</span>
+                </button>
+                <div id="profile-dropdown-menu" class="profile-dropdown-menu" role="listbox">
+                  <div class="profile-dropdown-header">SELECT PROFILE</div>
+                  <div class="profile-dropdown-divider"></div>
+                  <button class="profile-dropdown-item active" role="option" aria-selected="true" data-profile="all">
+                    <span>Family (2)</span>
+                  </button>
+                  <button class="profile-dropdown-item" role="option" aria-selected="false" data-profile="self">
+                    <span>Self (Vikram)</span>
+                  </button>
+                  <button class="profile-dropdown-item" role="option" aria-selected="false" data-profile="spouse">
+                    <span>Spouse (Meera)</span>
+                  </button>
+                </div>
+              </div>
             </div>
 
             <div class="mockup-grid">

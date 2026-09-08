@@ -25,22 +25,51 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // 2. Interactive Privacy Toggle in Hero Mockup Card & Slot Machine Effect
-  const privacyToggleBtn = document.getElementById('privacy-toggle-btn');
+  // 2. Interactive Profile Selector in Hero Mockup Card & Slot Machine Effect
+  const profileDropdownWrapper = document.getElementById('profile-dropdown-wrapper');
+  const profileDropdownBtn = document.getElementById('profile-dropdown-btn');
+  const profileBtnLabel = document.getElementById('profile-btn-label');
+  const profileItems = document.querySelectorAll('.profile-dropdown-item');
+
   const networthAmount = document.getElementById('networth-amount');
   const growthBadge = document.getElementById('growth-badge');
   const breakdownValues = document.querySelectorAll('.breakdown-val');
+  const statusLabel = document.getElementById('status-label');
+  const mockupAvatar = document.getElementById('mockup-avatar');
+  const mockupUserName = document.getElementById('mockup-user-name');
 
-  let isPrivate = false;
+  // Profile data for dynamic ticker switching
+  const profiles = {
+    all: {
+      label: 'Family (2)',
+      name: 'Vikram Menon',
+      avatar: 'V',
+      status: 'Master Vault Unlocked',
+      networth: '₹ 6.13 Cr',
+      growth: '+₹ 18.2 L (+14.2%) this year',
+      breakdowns: ['₹ 10.21 L', '₹ 10.08 L', '₹ 5.87 Cr', '₹ 8,000']
+    },
+    self: {
+      label: 'Self (Vikram)',
+      name: 'Vikram Menon',
+      avatar: 'V',
+      status: 'Self Portfolio',
+      networth: '₹ 4.82 Cr',
+      growth: '+₹ 14.5 L (+13.8%) this year',
+      breakdowns: ['₹ 8.15 L', '₹ 7.60 L', '₹ 4.66 Cr', '₹ 8,000']
+    },
+    spouse: {
+      label: 'Spouse (Meera)',
+      name: 'Meera Menon',
+      avatar: 'M',
+      status: 'Spouse Portfolio',
+      networth: '₹ 1.31 Cr',
+      growth: '+₹ 3.7 L (+15.9%) this year',
+      breakdowns: ['₹ 2.06 L', '₹ 2.48 L', '₹ 1.21 Cr', '₹ 0']
+    }
+  };
 
-  const realNetworth = '₹ 6.13 Cr';
-  const realGrowth = '+₹ 18.2 L (+14.2%) this year';
-  const realBreakdowns = [
-    '₹ 10.21 L', // Stocks
-    '₹ 10.08 L', // Mutual Funds
-    '₹ 5.87 Cr', // Deposits
-    '₹ 8,000'    // Loans
-  ];
+  let currentProfileKey = 'all';
 
   // Slot machine roll animation for numbers
   function runSlotMachine(container, targetText = '₹ 6.13 Cr', options = {}) {
@@ -116,20 +145,40 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // Play ticker on all numbers in the mockup card
-  function playAllSlotMachines() {
-    if (isPrivate) return;
+  function playAllSlotMachines(profileKey = currentProfileKey) {
+    const data = profiles[profileKey] || profiles.all;
 
     if (networthAmount) {
-      runSlotMachine(networthAmount, realNetworth, {
+      runSlotMachine(networthAmount, data.networth, {
         baseDelay: 40,
         baseDuration: 1050,
         digitStagger: 150
       });
     }
 
+    if (growthBadge) {
+      growthBadge.innerHTML = `
+        <span class="material-symbols-outlined" style="font-size: 14px;">trending_up</span>
+        ${data.growth}
+      `;
+    }
+
+    if (statusLabel) {
+      statusLabel.textContent = data.status;
+    }
+
+    if (mockupAvatar && data.avatar) {
+      mockupAvatar.textContent = data.avatar;
+      mockupAvatar.setAttribute('aria-label', data.name);
+    }
+
+    if (mockupUserName && data.name) {
+      mockupUserName.textContent = data.name;
+    }
+
     breakdownValues.forEach((el, index) => {
-      if (realBreakdowns[index]) {
-        runSlotMachine(el, realBreakdowns[index], {
+      if (data.breakdowns[index]) {
+        runSlotMachine(el, data.breakdowns[index], {
           baseDelay: 120 + index * 70,
           baseDuration: 850,
           digitStagger: 100
@@ -141,7 +190,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // Trigger slot machine on initial load / when visible
   let hasPlayedInitial = false;
   const playOnce = () => {
-    if (!hasPlayedInitial && !isPrivate) {
+    if (!hasPlayedInitial) {
       hasPlayedInitial = true;
       playAllSlotMachines();
     }
@@ -162,22 +211,21 @@ document.addEventListener('DOMContentLoaded', () => {
     playOnce();
   }
 
-  // Click to replay slot machine on net worth
+  // Replay slot machine on net worth click
   if (networthAmount) {
     networthAmount.setAttribute('title', 'Click to spin all numbers');
     networthAmount.addEventListener('click', () => {
-      if (!isPrivate) {
-        playAllSlotMachines();
-      }
+      playAllSlotMachines();
     });
   }
 
-  // Click to replay individual breakdown numbers
+  // Replay individual breakdown numbers on click
   breakdownValues.forEach((el, index) => {
     el.setAttribute('title', 'Click to spin');
     el.addEventListener('click', () => {
-      if (!isPrivate && realBreakdowns[index]) {
-        runSlotMachine(el, realBreakdowns[index], {
+      const data = profiles[currentProfileKey] || profiles.all;
+      if (data.breakdowns[index]) {
+        runSlotMachine(el, data.breakdowns[index], {
           baseDelay: 40,
           baseDuration: 850,
           digitStagger: 100
@@ -186,37 +234,49 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  if (privacyToggleBtn) {
-    privacyToggleBtn.addEventListener('click', () => {
-      isPrivate = !isPrivate;
+  // Profile Dropdown Interactivity
+  if (profileDropdownBtn && profileDropdownWrapper) {
+    profileDropdownBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const isOpen = profileDropdownWrapper.classList.toggle('open');
+      profileDropdownBtn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    });
 
-      if (isPrivate) {
-        privacyToggleBtn.innerHTML = `
-          <span class="material-symbols-outlined" style="font-size: 16px;">visibility</span>
-          <span>Show Numbers</span>
-        `;
-        if (networthAmount) {
-          networthAmount.textContent = '••••••••';
-          networthAmount.removeAttribute('aria-label');
-        }
-        if (growthBadge) growthBadge.innerHTML = '<span class="material-symbols-outlined" style="font-size: 14px;">visibility_off</span> Hidden';
-        breakdownValues.forEach((el) => {
-          el.textContent = '••••••';
-          el.removeAttribute('aria-label');
-        });
-      } else {
-        privacyToggleBtn.innerHTML = `
-          <span class="material-symbols-outlined" style="font-size: 16px;">visibility_off</span>
-          <span>Hide Numbers</span>
-        `;
-        playAllSlotMachines();
-        if (growthBadge) {
-          growthBadge.innerHTML = `
-            <span class="material-symbols-outlined" style="font-size: 14px;">trending_up</span>
-            ${realGrowth}
-          `;
-        }
+    // Close on click outside
+    document.addEventListener('click', (e) => {
+      if (!profileDropdownWrapper.contains(e.target)) {
+        profileDropdownWrapper.classList.remove('open');
+        profileDropdownBtn.setAttribute('aria-expanded', 'false');
       }
+    });
+
+    // Profile item selection
+    profileItems.forEach((item) => {
+      item.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const profileKey = item.dataset.profile;
+        if (!profileKey || !profiles[profileKey]) return;
+
+        currentProfileKey = profileKey;
+
+        // Update active class
+        profileItems.forEach((p) => {
+          p.classList.toggle('active', p === item);
+          p.setAttribute('aria-selected', p === item ? 'true' : 'false');
+        });
+
+        // Update button label
+        if (profileBtnLabel) {
+          profileBtnLabel.textContent = profiles[profileKey].label;
+        }
+
+        // Close dropdown
+        profileDropdownWrapper.classList.remove('open');
+        profileDropdownBtn.setAttribute('aria-expanded', 'false');
+
+        // Spin all numbers to selected member's portfolio!
+        playAllSlotMachines(profileKey);
+      });
     });
   }
 
