@@ -1072,79 +1072,7 @@ p {
   color: #10B981;
 }
 
-/* ==========================================================================
-   Security & Comparison Matrix Table
-   ========================================================================== */
-.comparison-section {
-  padding: 70px 0 90px;
-  background: #FFFFFF;
-  border-top: 1px solid var(--color-border-light);
-  border-bottom: 1px solid var(--color-border-light);
-}
 
-.table-wrapper {
-  overflow-x: auto;
-  border-radius: var(--radius-xl);
-  border: 1px solid var(--color-border);
-  box-shadow: var(--shadow-sm);
-  background: #FFFFFF;
-}
-
-.comparison-table {
-  width: 100%;
-  border-collapse: collapse;
-  text-align: left;
-  font-size: 14px;
-}
-
-.comparison-table th {
-  padding: 20px 24px;
-  font-family: var(--font-heading);
-  font-weight: 800;
-  font-size: 14px;
-  border-bottom: 1px solid var(--color-border);
-  background: #F8F9FA;
-  color: var(--color-navy);
-}
-
-.comparison-table th.col-orelio {
-  background: var(--color-mint);
-  color: var(--color-teal);
-  font-weight: 900;
-  font-size: 16px;
-}
-
-.comparison-table td {
-  padding: 18px 24px;
-  border-bottom: 1px solid var(--color-border-light);
-  color: var(--color-gray-body);
-}
-
-.comparison-table td.col-orelio {
-  background: rgba(230, 244, 241, 0.2);
-  font-weight: 700;
-  color: var(--color-forest);
-}
-
-.comparison-table tr:last-child td {
-  border-bottom: none;
-}
-
-.check-green {
-  color: #006A65;
-  font-weight: 700;
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-}
-
-.cross-red {
-  color: #BA1A1A;
-  font-weight: 600;
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-}
 
 /* ==========================================================================
    Interactive FAQ Section
@@ -1439,11 +1367,7 @@ html.theme-transitioning .breakdown-row,
 html.theme-transitioning .pillar-card,
 html.theme-transitioning .feature-card,
 html.theme-transitioning .features-section,
-html.theme-transitioning .comparison-section,
-html.theme-transitioning .table-wrapper,
-html.theme-transitioning .comparison-table,
-html.theme-transitioning .comparison-table th,
-html.theme-transitioning .comparison-table td,
+
 html.theme-transitioning .faq-item,
 html.theme-transitioning .faq-question,
 html.theme-transitioning .faq-answer,
@@ -1788,43 +1712,7 @@ html[data-theme="dark"] .feature-card:hover {
   border-color: rgba(20, 184, 166, 0.4);
 }
 
-html[data-theme="dark"] .comparison-section {
-  background: #060B11;
-}
 
-html[data-theme="dark"] .table-wrapper {
-  background: #0C141F;
-  border-color: rgba(255, 255, 255, 0.08);
-}
-
-html[data-theme="dark"] .comparison-table th {
-  background: #0F1A28;
-  border-color: rgba(255, 255, 255, 0.08);
-  color: #F1F5F9;
-}
-
-html[data-theme="dark"] .comparison-table th.col-orelio {
-  background: rgba(20, 184, 166, 0.18);
-  color: #2DD4BF;
-}
-
-html[data-theme="dark"] .comparison-table td {
-  border-color: rgba(255, 255, 255, 0.06);
-  color: #94A3B8;
-}
-
-html[data-theme="dark"] .comparison-table td.col-orelio {
-  background: rgba(20, 184, 166, 0.08);
-  color: #2DD4BF;
-}
-
-html[data-theme="dark"] .check-green {
-  color: #2DD4BF;
-}
-
-html[data-theme="dark"] .cross-red {
-  color: #F87171;
-}
 
 html[data-theme="dark"] .faq-item {
   background: #0C141F;
