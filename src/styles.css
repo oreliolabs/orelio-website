@@ -522,7 +522,7 @@ p {
 .mockup-card {
   background: #FFFFFF;
   border-radius: var(--radius-2xl);
-  padding: 28px 32px;
+  padding: 38px 42px;
   border: 1px solid var(--color-border);
   box-shadow: var(--shadow-lg);
   text-align: left;
@@ -1068,62 +1068,6 @@ p {
 }
 
 /* ==========================================================================
-   Future Roadmap / Upcoming Releases
-   ========================================================================== */
-.roadmap-section {
-  padding: 90px 0;
-}
-
-.roadmap-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 24px;
-}
-
-.roadmap-card {
-  background: linear-gradient(135deg, #FFFFFF 0%, #FBFCFD 100%);
-  border-radius: var(--radius-xl);
-  padding: 32px 28px;
-  border: 1px solid var(--color-border);
-  box-shadow: var(--shadow-sm);
-  position: relative;
-  transition: all 0.25s ease;
-}
-
-.roadmap-card:hover {
-  transform: translateY(-4px);
-  box-shadow: var(--shadow-md);
-}
-
-.roadmap-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 10px;
-  font-weight: 800;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  padding: 3px 9px;
-  border-radius: var(--radius-full);
-  background: #FEF3C7;
-  color: #92400E;
-  margin-bottom: 18px;
-}
-
-.roadmap-title {
-  font-size: 19px;
-  font-weight: 800;
-  margin-bottom: 10px;
-  color: var(--color-navy);
-}
-
-.roadmap-desc {
-  font-size: 13px;
-  color: var(--color-gray-muted);
-  line-height: 1.6;
-}
-
-/* ==========================================================================
    Security & Comparison Matrix Table
    ========================================================================== */
 .comparison-section {
@@ -1345,7 +1289,7 @@ p {
    ========================================================================== */
 .site-footer {
   border-top: 1px solid var(--color-border);
-  padding: 50px 0 34px;
+  padding: 50px 0 14px;
   background: #FFFFFF;
 }
 
@@ -1402,7 +1346,7 @@ p {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding-top: 24px;
+  padding-top: 10px;
   border-top: 1px solid var(--color-border-light);
   font-size: 12px;
   color: var(--color-gray-subtle);
@@ -1428,13 +1372,16 @@ p {
     display: block;
   }
 
+  .mockup-card {
+    padding: 24px 20px;
+  }
+
   .mockup-grid {
     grid-template-columns: 1fr;
   }
 
   .pillars-grid,
-  .features-grid,
-  .roadmap-grid {
+  .features-grid {
     grid-template-columns: 1fr;
   }
 
@@ -1487,8 +1434,6 @@ html.theme-transitioning .breakdown-row,
 html.theme-transitioning .pillar-card,
 html.theme-transitioning .feature-card,
 html.theme-transitioning .features-section,
-html.theme-transitioning .roadmap-card,
-html.theme-transitioning .roadmap-badge,
 html.theme-transitioning .comparison-section,
 html.theme-transitioning .table-wrapper,
 html.theme-transitioning .comparison-table,
@@ -1836,16 +1781,6 @@ html[data-theme="dark"] .feature-card {
 
 html[data-theme="dark"] .feature-card:hover {
   border-color: rgba(20, 184, 166, 0.4);
-}
-
-html[data-theme="dark"] .roadmap-card {
-  background: linear-gradient(135deg, #0C141F 0%, #08101A 100%);
-  border-color: rgba(255, 255, 255, 0.08);
-}
-
-html[data-theme="dark"] .roadmap-badge {
-  background: rgba(254, 243, 199, 0.12);
-  color: #FCD34D;
 }
 
 html[data-theme="dark"] .comparison-section {
