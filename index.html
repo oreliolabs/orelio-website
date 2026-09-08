@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Orelio</title>
+  <meta name="description" content="Orelio is a free, 100% private, open-source personal wealth ledger. Aggregate equities, mutual funds, deposits, and family portfolios with zero servers, zero telemetry, and local-first encryption.">
+  <link rel="icon" type="image/svg+xml" href="/assets/logo.svg">
+
+  <!-- Google Fonts: Hanken Grotesk, Outfit & Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700;800;900&family=Outfit:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Google Material Symbols Outlined -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+
+  <!-- Theme Initialization (Prevent FOUC) -->
+  <script>
+    (function() {
+      const savedTheme = localStorage.getItem('orelio_theme');
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      const theme = savedTheme ? savedTheme : (prefersDark ? 'dark' : 'light');
+      document.documentElement.setAttribute('data-theme', theme);
+    })();
+  </script>
+
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="/src/styles.css">
+</head>
+<body>
+  <!-- Ambient Atmospheric Glows -->
+  <div class="ambient-glow-top" aria-hidden="true"></div>
+  <div class="ambient-glow-right" aria-hidden="true"></div>
+  <div class="ambient-glow-left" aria-hidden="true"></div>
+
+  <!-- Site Navigation Header -->
+  <header class="site-header">
+    <div class="container nav-inner">
+      <a href="#" class="brand-logo" aria-label="Orelio Home">
+        <div class="logo-tile">
+          <img src="/assets/logo.svg" alt="Orelio Emblem">
+        </div>
+        <div class="brand-text">
+          <span class="brand-title">Orelio</span>
+          <span class="brand-tagline">WEALTH LEDGER</span>
+        </div>
+      </a>
+
+      <!-- Desktop Nav Links -->
+      <ul class="nav-links">
+        <li><a href="#features">Features</a></li>
+        <li><a href="#privacy">Privacy &amp; Security</a></li>
+        <li><a href="#roadmap">Roadmap</a></li>
+        <li><a href="#comparison">Comparison</a></li>
+        <li><a href="#faq">FAQ</a></li>
+      </ul>
+
+      <!-- Nav Actions -->
+      <div class="nav-actions">
+
+        <!-- Dark / Light Mode Toggle Button -->
+        <button id="theme-toggle" class="theme-toggle-btn" aria-label="Toggle dark mode" title="Toggle theme">
+          <span class="material-symbols-outlined theme-icon-dark">dark_mode</span>
+          <span class="material-symbols-outlined theme-icon-light">light_mode</span>
+        </button>
+
+        <a href="/" class="btn btn-primary btn-sm">
+          <span>Launch App</span>
+          <span class="material-symbols-outlined" style="font-size: 16px;">arrow_forward</span>
+        </a>
+
+        <button id="mobile-toggle" class="mobile-toggle" aria-label="Toggle navigation menu">
+          <span class="material-symbols-outlined">menu</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Drawer Navigation -->
+    <div id="mobile-drawer" class="mobile-nav-drawer">
+      <a href="#features">Features</a>
+      <a href="#privacy">Privacy &amp; Security</a>
+      <a href="#roadmap">Roadmap</a>
+      <a href="#comparison">Comparison</a>
+      <a href="#faq">FAQ</a>
+      <button id="mobile-theme-toggle" class="mobile-theme-toggle-btn" aria-label="Toggle dark mode">
+        <div class="mobile-theme-icon-wrap">
+          <span class="material-symbols-outlined theme-icon-dark">dark_mode</span>
+          <span class="material-symbols-outlined theme-icon-light">light_mode</span>
+        </div>
+        <span class="mobile-theme-text">Toggle Theme</span>
+      </button>
+      <a href="/" class="btn btn-primary" style="margin-top: 10px;">Launch App</a>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero Section -->
+    <section class="hero-section">
+      <div class="container">
+        <div class="hero-content">
+          <div class="eyebrow-badge">
+            <span class="material-symbols-outlined">verified_user</span>
+            <span>100% Private <span class="dot-separator">•</span> Free & Open Source <span class="dot-separator">•</span> Zero Telemetry</span>
+          </div>
+
+          <h1 class="hero-headline">
+            <span class="hero-title-line">Clarity across your wealth.</span>
+            <span class="hero-title-line gradient-text">Complete financial privacy.</span>
+          </h1>
+
+          <p class="hero-subtitle">
+            An open-source wealth ledger for your entire net worth — private and always under your control.
+          </p>
+
+          <div class="hero-actions">
+            <a href="/" class="btn btn-primary btn-lg">
+              <span>Open Wealth Ledger</span>
+              <span class="material-symbols-outlined">arrow_forward</span>
+            </a>
+            <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-lg">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/>
+              </svg>
+              <span>View Source Code</span>
+            </a>
+          </div>
+
+          <div class="trust-strip">
+            <div class="trust-item">
+              <span class="material-symbols-outlined">block</span>
+              <span>Zero Behavioral Telemetry</span>
+            </div>
+            <div class="trust-item">
+              <span class="material-symbols-outlined">code</span>
+              <span>Free &amp; Open Source</span>
+            </div>
+            <div class="trust-item">
+              <span class="material-symbols-outlined">key</span>
+              <span>Client-Side Encryption</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Interactive Hero Mockup Card -->
+        <div class="hero-mockup-wrapper">
+          <div class="mockup-card">
+            <div class="mockup-topbar">
+              <div class="mockup-user">
+                <img src="/assets/alexander_bloom_avatar.png" alt="Alexander Bloom" class="mockup-avatar">
+                <div>
+                  <div class="mockup-user-name">Alexander Bloom</div>
+                  <span class="mockup-user-status">
+                    <span class="material-symbols-outlined" style="font-size: 11px;">lock</span>
+                    Master Vault Unlocked
+                  </span>
+                </div>
+              </div>
+              <button id="privacy-toggle-btn" class="privacy-toggle-btn" aria-label="Toggle sensitive numbers visibility">
+                <span class="material-symbols-outlined" style="font-size: 16px;">visibility_off</span>
+                <span>Hide Numbers</span>
+              </button>
+            </div>
+
+            <div class="mockup-grid">
+              <div class="networth-box">
+                <div class="box-label">Aggregated Family Net Worth</div>
+                <div id="networth-amount" class="networth-amount">₹ 6.13 Cr</div>
+                <div id="growth-badge" class="growth-badge">
+                  <span class="material-symbols-outlined" style="font-size: 14px;">trending_up</span>
+                  <span>+₹ 18.2 L (+14.2%) this year</span>
+                </div>
+              </div>
+
+              <div class="breakdown-box">
+                <div class="breakdown-row">
+                  <div class="breakdown-title">
+                    <span class="material-symbols-outlined">show_chart</span>
+                    <span>Indian &amp; US Equities</span>
+                  </div>
+                  <span class="breakdown-val">₹ 10.21 L</span>
+                </div>
+                <div class="breakdown-row">
+                  <div class="breakdown-title">
+                    <span class="material-symbols-outlined">pie_chart</span>
+                    <span>Direct Mutual Funds</span>
+                  </div>
+                  <span class="breakdown-val">₹ 10.08 L</span>
+                </div>
+                <div class="breakdown-row">
+                  <div class="breakdown-title">
+                    <span class="material-symbols-outlined">account_balance</span>
+                    <span>Fixed Deposits &amp; Savings</span>
+                  </div>
+                  <span class="breakdown-val">₹ 5.87 Cr</span>
+                </div>
+                <div class="breakdown-row">
+                  <div class="breakdown-title">
+                    <span class="material-symbols-outlined">credit_card</span>
+                    <span>Liabilities &amp; Loans</span>
+                  </div>
+                  <span class="breakdown-val" style="color: #BA1A1A;">₹ 8,000</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Reference Value Pillars (3 Cards from Design Reference) -->
+    <section class="pillars-section">
+      <div class="container">
+        <div class="pillars-grid">
+          <!-- Pillar 1 -->
+          <div class="pillar-card">
+            <div class="pillar-icon-box">
+              <span class="material-symbols-outlined">upload_file</span>
+            </div>
+            <h3 class="pillar-title">Integrated CAS &amp; Demat</h3>
+            <p class="pillar-desc">
+              Instant statement ingestion from CDSL, NSDL, and CAMS. One-click parsing keeps your multi-broker holdings continuously synchronized without sharing broker passwords.
+            </p>
+          </div>
+
+          <!-- Pillar 2 -->
+          <div class="pillar-card">
+            <div class="pillar-icon-box">
+              <span class="material-symbols-outlined">family_restroom</span>
+            </div>
+            <h3 class="pillar-title">Multi-Family Hierarchy</h3>
+            <p class="pillar-desc">
+              Maintain distinct portfolios for yourself, your spouse, children, and parents while retaining a consolidated master net-worth overview across all family members.
+            </p>
+          </div>
+
+          <!-- Pillar 3 -->
+          <div class="pillar-card">
+            <div class="pillar-icon-box">
+              <span class="material-symbols-outlined">shield</span>
+            </div>
+            <h3 class="pillar-title">Bank-Grade Privacy</h3>
+            <p class="pillar-desc">
+              Your ledger is encrypted locally with PBKDF2 &amp; AES-256-GCM. No external servers or analytics trackers ever touch or observe your financial transactions.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Core Features Deep-Dive (3 Highlight Features) -->
+    <section id="features" class="features-section">
+      <div class="container">
+        <div class="section-header">
+          <div class="eyebrow-badge">
+            <span class="material-symbols-outlined">diamond</span>
+            <span>Uncompromising Design</span>
+          </div>
+          <h2 class="section-title">Built for Financial Sovereignty</h2>
+          <p class="section-subtitle">
+            Every screen and calculation in Orelio is designed to give you complete, uncompromising clarity over your personal finances.
+          </p>
+        </div>
+
+        <div class="features-grid">
+          <!-- Feature 1: Personal Wealth Ledger -->
+          <div class="feature-card">
+            <div>
+              <div class="feature-icon-wrapper">
+                <span class="material-symbols-outlined">account_balance_wallet</span>
+              </div>
+              <h3 class="feature-name">Comprehensive Wealth Ledger</h3>
+              <p class="feature-description">
+                Unify your entire financial life in one place. Monitor equities, direct mutual funds, corporate deposits, insurance policies, and offline safety locker notes in a clean, unified dashboard.
+              </p>
+            </div>
+            <ul class="feature-bullets">
+              <li>
+                <span class="material-symbols-outlined">check_circle</span>
+                <span>Equities, Mutual Funds, FDs &amp; Loans</span>
+              </li>
+              <li>
+                <span class="material-symbols-outlined">check_circle</span>
+                <span>Family member breakdown &amp; rollups</span>
+              </li>
+              <li>
+                <span class="material-symbols-outlined">check_circle</span>
+                <span>Asset allocation &amp; historical gains</span>
+              </li>
+              <li>
+                <span class="material-symbols-outlined">check_circle</span>
+                <span>Secure notes for bank lockers &amp; wills</span>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Feature 2: 100% Free & Open Source -->
+          <div class="feature-card">
+            <div>
+              <div class="feature-icon-wrapper">
+                <span class="material-symbols-outlined">code</span>
+              </div>
+              <h3 class="feature-name">Free &amp; Open Source</h3>
+              <p class="feature-description">
+                True wealth management demands absolute trust. Every line of Orelio's code is published openly on GitHub for auditing, inspection, and self-hosting. No paywalls, no subscriptions.
+              </p>
+            </div>
+            <ul class="feature-bullets">
+              <li>
+                <span class="material-symbols-outlined">check_circle</span>
+                <span>100% open source under permissive license</span>
+              </li>
+              <li>
+                <span class="material-symbols-outlined">check_circle</span>
+                <span>Audit every cryptographic function</span>
+              </li>
+              <li>
+                <span class="material-symbols-outlined">check_circle</span>
+                <span>No premium tier or feature lockouts</span>
+              </li>
+              <li>
+                <span class="material-symbols-outlined">check_circle</span>
+                <span>Run locally offline anytime</span>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Feature 3: 100% Private Zero Tracking -->
+          <div class="feature-card" id="privacy">
+            <div>
+              <div class="feature-icon-wrapper">
+                <span class="material-symbols-outlined">lock_person</span>
+              </div>
+              <h3 class="feature-name">100% Private, Zero Tracking</h3>
+              <p class="feature-description">
+                Zero telemetry, zero cloud databases, and zero analytics scripts. Your net worth, transactions, and account details never leave your device. Your data belongs to you alone.
+              </p>
+            </div>
+            <ul class="feature-bullets">
+              <li>
+                <span class="material-symbols-outlined">check_circle</span>
+                <span>No servers or remote database storage</span>
+              </li>
+              <li>
+                <span class="material-symbols-outlined">check_circle</span>
+                <span>Zero analytics, advertising, or trackers</span>
+              </li>
+              <li>
+                <span class="material-symbols-outlined">check_circle</span>
+                <span>Master password local encryption</span>
+              </li>
+              <li>
+                <span class="material-symbols-outlined">check_circle</span>
+                <span>Instant lock on logout with PBKDF2</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Future Roadmap / Upcoming Releases -->
+    <section id="roadmap" class="roadmap-section">
+      <div class="container">
+        <div class="section-header">
+          <div class="eyebrow-badge">
+            <span class="material-symbols-outlined">rocket_launch</span>
+            <span>Future Roadmap</span>
+          </div>
+          <h2 class="section-title">Features Launching in Later Releases</h2>
+          <p class="section-subtitle">
+            Expanding capabilities while fiercely protecting your offline-first privacy.
+          </p>
+        </div>
+
+        <div class="roadmap-grid">
+          <!-- Roadmap 1 -->
+          <div class="roadmap-card">
+            <span class="roadmap-badge">Upcoming Release</span>
+            <div class="pillar-icon-box" style="margin-top: 10px;">
+              <span class="material-symbols-outlined">sync</span>
+            </div>
+            <h3 class="roadmap-title">Cross-Platform Sync via Google Drive</h3>
+            <p class="roadmap-desc">
+              Work seamlessly across desktop, web, and mobile devices. Sync your encrypted vault directly through your personal Google Drive storage — eliminating third-party cloud intermediaries.
+            </p>
+          </div>
+
+          <!-- Roadmap 2 -->
+          <div class="roadmap-card">
+            <span class="roadmap-badge">Upcoming Release</span>
+            <div class="pillar-icon-box" style="margin-top: 10px;">
+              <span class="material-symbols-outlined">file_download</span>
+            </div>
+            <h3 class="roadmap-title">Zero Vendor Lock-in (JSON &amp; CSV)</h3>
+            <p class="roadmap-desc">
+              Export your entire portfolio, family hierarchies, and transaction logs at any time in open JSON or CSV formats. Your financial data is completely portable and always yours.
+            </p>
+          </div>
+
+          <!-- Roadmap 3 -->
+          <div class="roadmap-card">
+            <span class="roadmap-badge">In Development</span>
+            <div class="pillar-icon-box" style="margin-top: 10px;">
+              <span class="material-symbols-outlined">apartment</span>
+            </div>
+            <h3 class="roadmap-title">Bonds, Real Estate &amp; Gold</h3>
+            <p class="roadmap-desc">
+              Expanded asset class coverage: government and corporate bonds, residential and commercial real estate tracking, rental yield metrics, and physical gold/silver vault valuations.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Comparison Matrix Table -->
+    <section id="comparison" class="comparison-section">
+      <div class="container">
+        <div class="section-header">
+          <div class="eyebrow-badge">
+            <span class="material-symbols-outlined">compare_arrows</span>
+            <span>Transparent Comparison</span>
+          </div>
+          <h2 class="section-title">Why Discerning Investors Choose Orelio</h2>
+          <p class="section-subtitle">
+            How Orelio Wealth Ledger compares against traditional cloud-based aggregators.
+          </p>
+        </div>
+
+        <div class="table-wrapper">
+          <table class="comparison-table">
+            <thead>
+              <tr>
+                <th style="width: 38%;">Feature / Capability</th>
+                <th style="width: 31%;">Traditional FinTech Apps</th>
+                <th class="col-orelio" style="width: 31%;">Orelio Wealth Ledger</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Data Storage Location</strong></td>
+                <td><span class="cross-red">✗ Centralized Cloud Servers</span></td>
+                <td class="col-orelio"><span class="check-green">✓ 100% Local on your Device</span></td>
+              </tr>
+              <tr>
+                <td><strong>Telemetry &amp; Tracking</strong></td>
+                <td><span class="cross-red">✗ Behavioral Trackers &amp; Analytics</span></td>
+                <td class="col-orelio"><span class="check-green">✓ Zero Telemetry, Zero Cookies</span></td>
+              </tr>
+              <tr>
+                <td><strong>Code Transparency</strong></td>
+                <td><span class="cross-red">✗ Proprietary Closed Source</span></td>
+                <td class="col-orelio"><span class="check-green">✓ 100% Free &amp; Open Source</span></td>
+              </tr>
+              <tr>
+                <td><strong>Account Registration</strong></td>
+                <td><span class="cross-red">✗ Phone Number &amp; Email Required</span></td>
+                <td class="col-orelio"><span class="check-green">✓ No Account Needed to Start</span></td>
+              </tr>
+              <tr>
+                <td><strong>Master Password Vault Lock</strong></td>
+                <td><span class="cross-red">✗ Cloud Session Tokens</span></td>
+                <td class="col-orelio"><span class="check-green">✓ PBKDF2 Local Encryption Lock</span></td>
+              </tr>
+              <tr>
+                <td><strong>Data Ownership &amp; Export</strong></td>
+                <td><span class="cross-red">✗ Proprietary Vendor Lock-In</span></td>
+                <td class="col-orelio"><span class="check-green">✓ Raw JSON &amp; CSV Exports</span></td>
+              </tr>
+              <tr>
+                <td><strong>Pricing &amp; Monetization</strong></td>
+                <td><span class="cross-red">✗ Paid Tiers or Ad Sponsored</span></td>
+                <td class="col-orelio"><span class="check-green">✓ Free Forever for Everyone</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- Frequently Asked Questions -->
+    <section id="faq" class="faq-section">
+      <div class="container">
+        <div class="section-header">
+          <div class="eyebrow-badge">
+            <span class="material-symbols-outlined">help</span>
+            <span>Frequently Asked Questions</span>
+          </div>
+          <h2 class="section-title">Everything You Need to Know</h2>
+          <p class="section-subtitle">
+            Clear, honest answers about privacy, encryption, and the architecture of Orelio.
+          </p>
+        </div>
+
+        <div class="faq-list">
+          <div class="faq-item active">
+            <button class="faq-question">
+              <span>Is Orelio really 100% free and open source?</span>
+              <span class="material-symbols-outlined">expand_more</span>
+            </button>
+            <div class="faq-answer">
+              Yes, entirely. Every line of TypeScript, HTML, and CSS is published on GitHub. There are no premium tiers, no hidden subscription fees, and no in-app purchases. You can clone the repository, run it offline on your own machine, or contribute improvements.
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question">
+              <span>Where is my personal financial data stored?</span>
+              <span class="material-symbols-outlined">expand_more</span>
+            </button>
+            <div class="faq-answer">
+              Your financial portfolio data is stored locally on your machine in your browser's persistent storage and your local JSON database. Orelio does not have cloud databases, backend storage APIs, or user authentication servers.
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question">
+              <span>How does the master password security lock work?</span>
+              <span class="material-symbols-outlined">expand_more</span>
+            </button>
+            <div class="faq-answer">
+              When you set or update your master password, Orelio hashes and derives cryptographic keys client-side using PBKDF2. When you log out, your ledger state is immediately cleared from active memory and sealed. Only your correct master password can unlock your dashboard.
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question">
+              <span>How will Google Drive sync work without compromising privacy?</span>
+              <span class="material-symbols-outlined">expand_more</span>
+            </button>
+            <div class="faq-answer">
+              Our upcoming cross-platform sync utilizes direct OAuth authorization to your personal Google Drive account. Your ledger file is encrypted client-side before syncing. Orelio never operates intermediary relay servers — data transfers strictly between your device and your personal Drive storage.
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question">
+              <span>Can I import my existing CAS statements from CDSL or CAMS?</span>
+              <span class="material-symbols-outlined">expand_more</span>
+            </button>
+            <div class="faq-answer">
+              Yes. Orelio supports integrated CAS ingestion for both CDSL and NSDL demat statements, as well as CAMS / KFintech consolidated account statements. Parsing occurs client-side in memory on your device.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Call To Action (CTA) Banner -->
+    <section class="cta-section">
+      <div class="container">
+        <div class="cta-banner">
+          <h2 class="cta-title">Take total control of your wealth today.</h2>
+          <p class="cta-subtitle">
+            No accounts to create. No trackers monitoring your net worth. Just pure financial clarity and luxury craft.
+          </p>
+          <div class="cta-actions">
+            <a href="/" class="btn btn-white btn-lg">
+              <span>Launch Orelio Ledger</span>
+              <span class="material-symbols-outlined">arrow_forward</span>
+            </a>
+            <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="btn btn-ghost-white btn-lg">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/>
+              </svg>
+              <span>Explore GitHub Repository</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Site Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-top">
+        <div>
+          <a href="#" class="brand-logo" aria-label="Orelio Home">
+            <div class="logo-tile">
+              <img src="/assets/logo.svg" alt="Orelio Emblem">
+            </div>
+            <div class="brand-text">
+              <span class="brand-title">Orelio</span>
+              <span class="brand-tagline">WEALTH LEDGER</span>
+            </div>
+          </a>
+          <p class="footer-desc">
+            The private, open-source personal wealth ledger designed for discerning individuals and families.
+          </p>
+        </div>
+
+        <div class="footer-links-grid">
+          <div>
+            <h4 class="footer-col-title">Product</h4>
+            <ul class="footer-col-links">
+              <li><a href="#features">Features</a></li>
+              <li><a href="#roadmap">Roadmap</a></li>
+              <li><a href="#comparison">Comparison</a></li>
+              <li><a href="/">Launch Web App</a></li>
+            </ul>
+          </div>
+
+          <div>
+            <h4 class="footer-col-title">Privacy &amp; Trust</h4>
+            <ul class="footer-col-links">
+              <li><a href="#privacy">Zero Telemetry</a></li>
+              <li><a href="#privacy">Local Encryption</a></li>
+              <li><a href="#faq">Security Architecture</a></li>
+              <li><a href="#faq">FAQ</a></li>
+            </ul>
+          </div>
+
+          <div>
+            <h4 class="footer-col-title">Open Source</h4>
+            <ul class="footer-col-links">
+              <li><a href="https://github.com" target="_blank" rel="noopener noreferrer">GitHub Repository</a></li>
+              <li><a href="https://github.com" target="_blank" rel="noopener noreferrer">Issue Tracker</a></li>
+              <li><a href="https://github.com" target="_blank" rel="noopener noreferrer">Releases</a></li>
+              <li><a href="https://github.com" target="_blank" rel="noopener noreferrer">License (MIT)</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div>
+          &copy; 2026 Orelio Wealth Ledger. Free &amp; Open Source Software.
+        </div>
+        <div style="display: flex; align-items: center; gap: 6px;">
+          <span class="material-symbols-outlined" style="font-size: 14px; color: var(--color-teal);">lock</span>
+          <span>100% Private <span class="dot-separator">•</span> Local-First <span class="dot-separator">•</span> Zero Remote Servers</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Interactive JavaScript -->
+  <script type="module" src="/src/script.js"></script>
+</body>
+</html>
