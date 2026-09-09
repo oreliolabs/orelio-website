@@ -623,14 +623,16 @@ p {
   display: inline-block;
   z-index: 50;
   margin-left: auto;
+  width: 185px;
 }
 
 .profile-dropdown-btn {
-  display: inline-flex;
+  display: flex;
   align-items: center;
-  gap: 9px;
+  gap: 8px;
+  width: 100%;
   min-height: 42px;
-  padding: 8px 14px 8px 12px;
+  padding: 8px 12px;
   border-radius: 12px;
   background: #FFFFFF;
   border: 1px solid var(--color-border);
@@ -660,21 +662,28 @@ p {
   font-size: 18px;
   color: var(--color-gray-muted);
   transition: transform 0.2s ease;
+  margin-left: auto;
 }
 
 .profile-dropdown-wrapper.open .profile-btn-chevron {
   transform: rotate(180deg);
 }
 
+.profile-dropdown-wrapper.open .profile-dropdown-btn {
+  border-color: rgba(0, 106, 101, 0.4);
+}
+
 .profile-dropdown-menu {
   display: none;
   position: absolute;
   top: calc(100% + 8px);
+  left: 0;
   right: 0;
-  min-width: 200px;
+  width: 100%;
+  min-width: 100%;
   background: #FFFFFF;
   border: 1px solid var(--color-border);
-  border-radius: 16px;
+  border-radius: 14px;
   box-shadow: 0 14px 36px rgba(0, 22, 42, 0.12);
   padding: 8px 0;
   z-index: 100;
@@ -1099,9 +1108,6 @@ p {
   transition: border-color 0.2s ease;
 }
 
-.faq-item.active {
-  border-color: var(--color-teal);
-}
 
 .faq-question {
   width: 100%;
@@ -1767,7 +1773,8 @@ html[data-theme="dark"] .profile-btn-chevron {
   color: #94A3B8;
 }
 
-html[data-theme="dark"] .profile-dropdown-btn:hover {
+html[data-theme="dark"] .profile-dropdown-btn:hover,
+html[data-theme="dark"] .profile-dropdown-wrapper.open .profile-dropdown-btn {
   background: #142032;
   border-color: rgba(20, 184, 166, 0.4);
 }
@@ -1877,9 +1884,6 @@ html[data-theme="dark"] .quickstart-subtitle {
   color: #94A3B8;
 }
 
-html[data-theme="dark"] .faq-item.active {
-  border-color: #14B8A6;
-}
 
 
 
