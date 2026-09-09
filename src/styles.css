@@ -50,11 +50,11 @@
   --color-surface-translucent: rgba(12, 20, 31, 0.85);
   --color-navy: #F1F5F9;
   --color-navy-muted: #CBD5E1;
-  --color-teal: #14B8A6;
-  --color-teal-hover: #2DD4BF;
-  --color-teal-active: #0D9488;
-  --color-mint: rgba(20, 184, 166, 0.16);
-  --color-mint-border: rgba(20, 184, 166, 0.32);
+  --color-teal: #0D9488;
+  --color-teal-hover: #14B8A6;
+  --color-teal-active: #0F766E;
+  --color-mint: rgba(13, 148, 136, 0.16);
+  --color-mint-border: rgba(13, 148, 136, 0.32);
   --color-forest: #2DD4BF;
   --color-gray-body: #94A3B8;
   --color-gray-muted: #64748B;
@@ -68,7 +68,7 @@
   --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.55);
   --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.65);
   --shadow-lg: 0 16px 40px rgba(0, 0, 0, 0.85);
-  --shadow-teal: 0 8px 25px rgba(20, 184, 166, 0.2);
+  --shadow-teal: 0 8px 25px rgba(13, 148, 136, 0.28);
 }
 
 /* Reset & Base Setup */
@@ -162,6 +162,7 @@ p {
   color: var(--color-teal);
   background: linear-gradient(135deg, #006A65 0%, #004D40 100%);
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
@@ -1726,6 +1727,13 @@ html[data-theme="dark"] .eyebrow-badge {
 
 html[data-theme="dark"] .eyebrow-badge .material-symbols-outlined {
   color: #2DD4BF;
+}
+
+html[data-theme="dark"] .gradient-text {
+  background: linear-gradient(90deg, #16C5B2 0%, #00736A 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 html[data-theme="dark"] .vault-status-pill {
