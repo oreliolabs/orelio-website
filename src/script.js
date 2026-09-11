@@ -373,7 +373,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // 5. Dark / Light Theme Toggle
   const themeToggle = document.getElementById('theme-toggle');
-  const mobileThemeToggle = document.getElementById('mobile-theme-toggle');
 
   const getTheme = () => document.documentElement.getAttribute('data-theme') || 'light';
 
@@ -382,10 +381,6 @@ document.addEventListener('DOMContentLoaded', () => {
     if (themeToggle) {
       themeToggle.setAttribute('aria-label', `Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`);
       themeToggle.setAttribute('title', `Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`);
-    }
-    const mobileText = document.querySelector('.mobile-theme-text');
-    if (mobileText) {
-      mobileText.textContent = theme === 'dark' ? 'Switch to Light Mode' : 'Switch to Dark Mode';
     }
   };
 
@@ -408,10 +403,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
   if (themeToggle) {
     themeToggle.addEventListener('click', toggleTheme);
-  }
-
-  if (mobileThemeToggle) {
-    mobileThemeToggle.addEventListener('click', toggleTheme);
   }
 
   // Sync with OS preference if user hasn't explicitly set one
