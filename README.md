@@ -6,6 +6,12 @@ This repository contains the source code and interactive components powering the
 
 ---
 
+## 🎥 Demo
+
+<video src="orelio-website.mp4" controls width="100%"></video>
+
+---
+
 ## ⚡ Tech Stack
 
 - **Markup:** Semantic HTML5
