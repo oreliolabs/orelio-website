@@ -8,7 +8,7 @@ This repository contains the source code and interactive components powering the
 
 ## 🎥 Demo
 
-<video src="orelio-website.mp4" controls width="100%"></video>
+[![Watch the demo](https://img.youtube.com/vi/w7hFHHvKXX0/maxresdefault.jpg)](https://youtu.be/w7hFHHvKXX0)
 
 ---
 
